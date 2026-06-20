@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--
+  WEATHER APP - ENHANCED HTML STRUCTURE
+  =====================================
+  Developer Mindset: 
+  - Use semantic HTML5 elements for better SEO and accessibility
+  - Unique IDs for JavaScript DOM manipulation
+  - Data attributes for enhanced functionality
+  - Comments explaining purpose of each section
+  - Responsive viewport meta tag for mobile optimization
+-->
+
+<html lang="en">
+<head>
+    <!-- Character encoding: UTF-8 supports all international characters -->
+    <meta charset="UTF-8">
+    
+    <!-- 
+      Viewport Meta Tag - CRITICAL for Responsive Design
+      Why: Tells mobile browsers to display at device width (1:1 pixel ratio)
+      Real Scenario: Without this, mobile devices scale down desktop version
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page title shown in browser tab -->
+    <title>Weather App - Real-time Weather Forecast</title>
+    
+    <!-- Link external CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- 
+      Main Container - Wrapper for all content
+      Why: Helps with centering and responsive layout management
+      Classes: weather-wrapper (main container), weather-container (card container)
+    -->
+    <div class="weather-wrapper">
+        <!-- 
+          Weather Card - Main UI Component
+          Why: Semantic <article> tag indicates independent, self-contained content
+          Data Attribute: data-loading-state tracks UI state (idle/loading/success/error)
+        -->
+        <article class="weather-card" data-loading-state="idle">
+            
+            <!-- Header Section -->
+            <header class="weather-header">
+                <h1 class="app-title">🌤️ Weather App</h1>
+                <p class="app-subtitle">Real-time Weather Forecast</p>
+            </header>
+
+            <!-- 
+              Search Section - User Input Area
+              Why: Organized search functionality in dedicated section
+              Logic: User enters city, clicks button or presses Enter to fetch weather
+            -->
+            <section class="search-section">
+                <div class="search-box">
+                    <!-- 
+                      City Input Field
+                      Why: Accepts city name as search parameter
+                      Real Scenario: User types "London", "Tokyo", "New York"
+                      Attributes:
+                      - id: Unique identifier for JavaScript reference
+                      - type: text input (not password, not number)
+                      - placeholder: Hints user about expected input
+                      - autocomplete: Suggests previously searched cities (browser feature)
+                    -->
+                    <input 
+                        type="text" 
+                        id="cityInput" 
+                        class="search-input"
+                        placeholder="Enter city name (e.g., London, Tokyo)" 
+                        autocomplete="off"
+                        aria-label="City search input"
+                    >
+                    
+                    <!-- 
+                      Search Button
+                      Why: Triggers weather fetch function
+                      Real Scenario: Click to search or press Enter key
+                      Note: ID uses camelCase (JavaScript convention)
+                    -->
+                    <button 
+                        id="searchBtn" 
+                        class="search-btn"
+                        type="button"
+                        aria-label="Search weather button"
+                    >
+                        Search
+                    </button>
+                </div>
+            </section>
+
+            <!-- 
+              Weather Information Display Section
+              Why: Semantic <section> groups related weather data
+              Structure: Dynamic content filled by JavaScript after API fetch
+              Classes: weather-info (container), weather-item (individual data)
+            -->
+            <section class="weather-info">
+                <!-- 
+                  City Name / Location Display
+                  Why: Shows current location being displayed
+                  Logic: Replaced by JavaScript with format: "City, Country"
+                  Example: "London, United Kingdom"
+                -->
+                <div class="weather-item city-display">
+                    <h2 id="cityName" class="city-name">📍 Location: --</h2>
+                </div>
+
+                <!-- 
+                  Temperature Display
+                  Why: Primary weather metric users want to know
+                  Real Scenario: "🌡️ Temperature: 22°C"
+                -->
+                <div class="weather-item temperature-display">
+                    <p id="temperature" class="temperature">🌡️ Temperature: --</p>
+                </div>
+
+                <!-- 
+                  Weather Condition Display
+                  Why: Descriptive text about current weather (sunny, rainy, cloudy, etc.)
+                  Logic: Maps weather code to human-readable description with emoji
+                  Real Scenario: "☁️ Condition: Partly Cloudy ⛅"
+                -->
+                <div class="weather-item condition-display">
+                    <p id="condition" class="condition">☁️ Condition: --</p>
+                </div>
+
+                <!-- 
+                  Wind Speed Display
+                  Why: Important safety metric (affects outdoor activities)
+                  Real Scenario: "💨 Wind Speed: 15 km/h"
+                -->
+                <div class="weather-item wind-display">
+                    <p id="windSpeed" class="wind-speed">💨 Wind Speed: --</p>
+                </div>
+
+                <!-- 
+                  Additional Metrics Section (Expandable)
+                  Why: Shows more detailed weather information
+                  Real Scenario: Used in professional weather apps
+                -->
+                <div class="weather-item advanced-metrics">
+                    <div class="metric">
+                        <span class="metric-label">💧 Humidity:</span>
+                        <span id="humidity" class="metric-value">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">🌊 Pressure:</span>
+                        <span id="pressure" class="metric-value">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 
+              Loading Indicator
+              Why: Shows user that data is being fetched (UX improvement)
+              Logic: Hidden by default, shown during API call, hidden when complete
+              Real Scenario: User sees spinner instead of page hanging
+            -->
+            <div id="loading" class="loading-indicator" hidden>
+                <div class="spinner"></div>
+                <p class="loading-text">Fetching weather data...</p>
+            </div>
+
+            <!-- 
+              Error Message Container
+              Why: Displays user-friendly error messages
+              Logic: Hidden by default, shown when API call fails
+              Real Scenario: "City not found" or "Network error"
+            -->
+            <div id="errorMessage" class="error-message" hidden>
+                <p id="errorText"></p>
+            </div>
+
+            <!-- 
+              Last Updated Timestamp
+              Why: Shows when weather data was last refreshed
+              Real Scenario: "Last updated: 2:30 PM"
+            -->
+            <footer class="weather-footer">
+                <p id="lastUpdate" class="last-update">Last updated: Never</p>
+            </footer>
+        </article>
+    </div>
+
+    <!-- 
+      External JavaScript File
+      Why: Separates logic from HTML structure (clean architecture)
+      Placement: At end of body (best practice for performance)
+      Real Scenario: Allows browser to render HTML before loading JS
+    -->
+    <script src="script.js"></script>
+</body>
+</html>
