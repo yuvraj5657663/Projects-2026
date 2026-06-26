@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <div class="app-card">
+            <header class="app-header">
+                <span class="eyebrow">Interactive CRUD Todo</span>
+                <h1>My Todo List</h1>
+                <p class="subtitle">Create, edit, search, complete, and manage tasks with a smooth animated UI.</p>
+            </header>
+
+            <section class="controls-grid">
+                <div class="input-box">
+                    <input type="text" id="todoInput" placeholder="Add a new task" autocomplete="off">
+                    <button id="addBtn" class="primary-btn">Add Task</button>
+                </div>
+
+                <div class="search-box">
+                    <label for="searchInput">Search tasks</label>
+                    <input type="text" id="searchInput" placeholder="Search todos">
+                </div>
+            </section>
+
+            <section class="status-row">
+                <div class="stats">
+                    <span id="taskCount">0 tasks</span>
+                    <span id="activeCount">0 active</span>
+                </div>
+                <button type="button" id="clearCompletedBtn" class="ghost-btn">Clear Completed</button>
+            </section>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+
+            <ul id="todoList" class="todo-list"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-row">
+            <h1>Notes App</h1>
+            <button id="themeToggle" class="theme-toggle" type="button">Switch to Light</button>
+        </div>
+
+        <div class="input-box">
+            <input type="text" id="titleInput" placeholder="Title">
+            <textarea id="contentInput" placeholder="Write note..."></textarea>
+            <div class="category-row">
+                <label for="categoryInput">Category</label>
+                <select id="categoryInput">
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                </select>
+            </div>
+            <button id="addBtn">Add Note</button>
+        </div>
+
+        <div class="toolbar">
+            <input type="text" id="searchInput" placeholder="Search notes...">
+            <span id="noteCount" class="note-count"></span>
+        </div>
+
+        <div id="notesContainer" class="notes-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

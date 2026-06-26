@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital clock</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <div class="clock-container">
+            <h2 id="greeting"></h2>
+
+            <h1 id="clock">
+                00:00:00
+            </h1>
+
+            <p id="period">
+                AM
+            </p>
+
+            <h3 id="date"></h3>
+
+            <label for="alarmTime">Set Alarm Time</label>
+            <input id="alarmTime" type="time" name="alarmTime" />
+            <button id="setAlarm">
+                Set Alarm
+            </button>
+            <button id="stopAlarm">
+                Stop Alarm
+            </button>
+
+            <div class="alarms-ui">
+                <h4>Alarms (<span id="alarmCount">0</span>)</h4>
+                <ul id="alarmsList"></ul>
+                <button id="clearAlarms">Clear All</button>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

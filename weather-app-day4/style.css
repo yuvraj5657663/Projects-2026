@@ -1,0 +1,615 @@
+/*
+  WEATHER APP - PROFESSIONAL CSS WITH RESPONSIVE DESIGN
+  ======================================================
+  
+  Developer Mindset:
+  - Mobile-first approach (code for mobile, then enhance for desktop)
+  - CSS variables for maintainability (easier to change colors, sizes globally)
+  - Flexbox/Grid for responsive layouts
+  - Transitions and animations for better UX
+  - Media queries for different screen sizes
+  - Semantic class naming (BEM methodology)
+  
+  Real Scenario: Your app works on phone (320px), tablet (768px), and desktop (1920px)
+*/
+
+/* ==========================================
+   1. CSS VARIABLES & RESET
+   ========================================== 
+   Why: Define colors, sizes once, reuse everywhere
+   Real Scenario: Client asks to change primary color from blue to green
+   Solution: Change one variable instead of searching entire file
+*/
+
+:root {
+    /* Color Variables - Easy to theme */
+    --primary-color: #2563eb;           /* Button, active elements */
+    --secondary-color: #64748b;         /* Secondary text */
+    --background-light: #f8fafc;        /* Light backgrounds */
+    --background-dark: #0f172a;         /* Dark theme backgrounds */
+    --border-color: #e2e8f0;            /* Input borders */
+    --success-color: #10b981;           /* Success messages */
+    --error-color: #ef4444;             /* Error messages */
+    --text-primary: #1e293b;            /* Main text color */
+    --text-secondary: #64748b;          /* Secondary text */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+    
+    /* Spacing Variables - Consistent gaps */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Border Radius - Consistent rounded corners */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    
+    /* Transitions - Smooth animations */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* 
+   Universal Reset
+   Why: Removes browser default styles (margin, padding)
+   Effect: Starts with clean slate for custom styling
+   Real Scenario: Ensures consistent look across all browsers
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  /* Includes padding/border in width calculation */
+}
+
+/* ==========================================
+   2. BODY & MAIN LAYOUT
+   ========================================== 
+   Why: Full-height background with flexbox centering
+   Mobile-first: Single column centered layout
+*/
+
+html {
+    scroll-behavior: smooth;  /* Smooth scrolling for navigation */
+}
+
+body {
+    /* 
+       Flexbox Layout - Centers content vertically and horizontally
+       Why: Works on all screen sizes without extra code
+       Real Scenario: Card appears in middle of screen, not top-left
+    */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  /* At least full viewport height */
+    
+    /* Typography */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    
+    /* Background - Gradient for visual appeal */
+    background: linear-gradient(135deg, var(--background-dark) 0%, #1e3a8a 100%);
+    
+    /* Padding for mobile (prevents content touching screen edges) */
+    padding: var(--spacing-md);
+    
+    /* Smooth transition when resizing */
+    transition: background-color var(--transition-normal);
+}
+
+/* ==========================================
+   3. WEATHER WRAPPER & CARD
+   ========================================== 
+   Why: Container for all weather content
+   Mobile-first: 100% width, max-width on larger screens
+*/
+
+.weather-wrapper {
+    width: 100%;
+    max-width: 500px;  /* Limits width on large screens */
+}
+
+.weather-card {
+    /* Background & Styling */
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+    
+    /* Animation when page loads */
+    animation: slideUp 0.6s ease;
+    
+    /* Responsive padding */
+    @media (max-width: 480px) {
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+    }
+}
+
+/* ==========================================
+   4. HEADER SECTION
+   ========================================== 
+*/
+
+.weather-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--spacing-md);
+}
+
+.app-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    
+    /* Add text shadow for depth */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    
+    @media (max-width: 480px) {
+        font-size: 2rem;
+    }
+}
+
+.app-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* ==========================================
+   5. SEARCH SECTION
+   ========================================== 
+   Why: Input field and button container
+   Logic: Flexbox keeps input and button side-by-side on all sizes
+*/
+
+.search-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.search-box {
+    /* 
+       Flexbox: Arranges items horizontally (row)
+       Why: Input takes space, button fixed width
+       Real Scenario: Works on mobile and desktop without changes
+    */
+    display: flex;
+    gap: var(--spacing-sm);
+    
+    /* Responsive: Stack on very small screens */
+    @media (max-width: 380px) {
+        flex-direction: column;
+    }
+}
+
+/* 
+   Search Input Field
+   Why: Accepts city name for weather search
+   Real Scenario: User types "London" to get weather
+*/
+.search-input {
+    flex: 1;  /* Takes available space */
+    padding: var(--spacing-md);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: inherit;
+    
+    /* Focus state - Better UX */
+    outline: none;
+    transition: all var(--transition-normal);
+    
+    /* When user focuses on input */
+    &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        background-color: var(--background-light);
+    }
+    
+    /* Placeholder text styling */
+    &::placeholder {
+        color: #bbb;
+    }
+    
+    /* Mobile: Larger touch target (minimum 44px) */
+    @media (max-width: 480px) {
+        padding: 12px var(--spacing-md);
+        font-size: 16px;  /* Prevents zoom on iOS */
+    }
+}
+
+/* 
+   Search Button
+   Why: Triggers weather API fetch
+   Real Scenario: Click or Enter key fetches weather data
+*/
+.search-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    
+    /* Smooth transitions for interactive effects */
+    transition: all var(--transition-normal);
+    
+    /* Hover state - Desktop users see feedback */
+    &:hover {
+        background-color: #1d4ed8;  /* Darker blue */
+        transform: translateY(-2px);  /* Lift effect */
+        box-shadow: var(--shadow-md);
+    }
+    
+    /* Active state - When user clicks */
+    &:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    /* Focus state - Keyboard users see feedback */
+    &:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+    
+    /* Loading state - Cursor shows processing */
+    &[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+    
+    /* Mobile: Larger touch target */
+    @media (max-width: 480px) {
+        flex: 0 0 auto;
+        padding: 12px var(--spacing-md);
+    }
+}
+
+/* ==========================================
+   6. WEATHER INFO SECTION
+   ========================================== 
+   Why: Displays temperature, condition, wind speed
+   Logic: Grid layout for organized display
+*/
+
+.weather-info {
+    background: var(--background-light);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    
+    /* Animation when data loads */
+    animation: fadeIn 0.5s ease 0.2s both;
+}
+
+/* 
+   Individual Weather Item
+   Why: Container for each weather metric
+   Real Scenario: Padding and border for visual separation
+*/
+.weather-item {
+    padding: var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-sm);
+    border-left: 4px solid var(--primary-color);
+    
+    /* Smooth hover effect */
+    transition: all var(--transition-normal);
+    
+    /* On hover: Slight shadow and lift */
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateX(4px);
+    }
+}
+
+/* City Display */
+.city-display .city-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+/* Temperature Display */
+.temperature-display .temperature {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f97316;  /* Orange for warmth feeling */
+}
+
+/* Condition Display */
+.condition-display .condition {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Wind Speed Display */
+.wind-display .wind-speed {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #3b82f6;  /* Blue for air/wind */
+}
+
+/* ==========================================
+   7. ADVANCED METRICS (HUMIDITY & PRESSURE)
+   ========================================== 
+   Why: Extra weather data for detailed info
+   Logic: Two-column layout on desktop, stacked on mobile
+*/
+
+.advanced-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    border-left-color: #10b981;  /* Green for secondary info */
+    
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metric-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   8. LOADING INDICATOR
+   ========================================== 
+   Why: Shows user that data is being fetched
+   Real Scenario: Prevents user clicking button multiple times
+*/
+
+.loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl);
+    animation: fadeIn var(--transition-normal);
+}
+
+.loading-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* 
+   Spinner Animation
+   Why: Visual indicator of loading process
+   Real Scenario: User sees rotating spinner instead of frozen UI
+*/
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ==========================================
+   9. ERROR MESSAGE
+   ========================================== 
+   Why: User-friendly error display
+   Logic: Red color indicates error
+*/
+
+.error-message {
+    background-color: #fee2e2;  /* Light red background */
+    color: #dc2626;  /* Dark red text */
+    border-left: 4px solid var(--error-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    animation: slideDown 0.3s ease;
+}
+
+#errorText {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ==========================================
+   10. FOOTER
+   ========================================== 
+   Why: Shows last update timestamp
+   Real Scenario: User knows how fresh the data is
+*/
+
+.weather-footer {
+    text-align: center;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--spacing-lg);
+}
+
+.last-update {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ==========================================
+   11. ANIMATIONS & TRANSITIONS
+   ========================================== 
+   Why: Smooth, professional feel to app
+   Real Scenario: App feels responsive and polished
+*/
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================
+   12. RESPONSIVE DESIGN - TABLET
+   ========================================== 
+   Why: Optimize for medium screens (768px+)
+   Real Scenario: iPad or small laptop users
+*/
+
+@media (min-width: 768px) {
+    .weather-wrapper {
+        max-width: 600px;
+    }
+    
+    .weather-card {
+        padding: var(--spacing-xl);
+    }
+    
+    .app-title {
+        font-size: 3rem;
+    }
+}
+
+/* ==========================================
+   13. RESPONSIVE DESIGN - DESKTOP
+   ========================================== 
+   Why: Optimize for large screens (1024px+)
+   Real Scenario: Desktop users with large monitors
+*/
+
+@media (min-width: 1024px) {
+    .weather-wrapper {
+        max-width: 700px;
+    }
+    
+    /* Enhanced hover effects on desktop */
+    .weather-item:hover {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        transform: translateX(8px) translateY(-2px);
+    }
+    
+    .search-btn:hover {
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    }
+}
+
+/* ==========================================
+   14. DARK MODE SUPPORT (Future Enhancement)
+   ========================================== 
+   Why: Support system dark mode preference
+   Real Scenario: Modern apps offer dark mode
+   Logic: Activates when user's system is in dark mode
+*/
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --background-light: #1e293b;
+    }
+    
+    .weather-card {
+        background: #0f172a;
+    }
+    
+    .weather-info {
+        background: #1e293b;
+    }
+    
+    .weather-item {
+        background: #334155;
+    }
+}
+
+/* ==========================================
+   15. ACCESSIBILITY & PRINT STYLES
+   ========================================== 
+*/
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .search-section {
+        display: none;
+    }
+    
+    .weather-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+

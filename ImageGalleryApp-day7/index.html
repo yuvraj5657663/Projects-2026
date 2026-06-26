@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery App</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Image Gallery</h1>
+            <p>Upload, search, and manage your images.</p>
+        </header>
+
+        <section class="upload-section">
+            <label for="imageInput">
+                Select image
+            </label>
+
+            <input type="file" id="imageInput" accept="image/*" multiple>
+
+            <button id="uploadBtn">Upload</button>
+            <button id="clearGalleryBtn">Clear Gallery</button>
+        </section>
+
+        <section id="previewSection" class="preview-section" aria-live="polite">
+            <h2>Preview</h2>
+            <div id="imagePreview" class="preview-grid"></div>
+        </section>
+
+        <section class="search-section">
+            <input type="text" id="searchInput" placeholder="Search images...">
+        </section>
+
+        <section id="gallery" class="gallery">
+
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
