@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VO Expense Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="app-shell">
+
+        <!-- ═══ HEADER ═══ -->
+        <header class="app-header">
+            <div>
+                <p class="eyebrow">Jivika Account Register</p>
+                <h1>VO Expense Tracker</h1>
+            </div>
+        </header>
+
+        <!-- ═══ SUMMARY CARDS ═══ -->
+        <section class="summary-grid" aria-label="Transaction summary">
+            <article class="summary-card income-card">
+                <div class="card-top">
+                    <span class="card-icon income-icon">&#8679;</span>
+                    <span class="card-label">Total Income</span>
+                </div>
+                <strong id="income">Rs. 0</strong>
+                <button id="addIncomeBtn" class="card-action-btn income-action-btn" type="button">+ Add Income</button>
+            </article>
+
+            <article class="summary-card expense-card">
+                <div class="card-top">
+                    <span class="card-icon expense-icon">&#8681;</span>
+                    <span class="card-label">Total Expense</span>
+                </div>
+                <strong id="expense">Rs. 0</strong>
+                <button id="addExpenseBtn" class="card-action-btn expense-action-btn" type="button">+ Add Expense</button>
+            </article>
+
+            <article class="summary-card balance-card">
+                <div class="card-top">
+                    <span class="card-label">Current Balance</span>
+                </div>
+                <strong id="balance">Rs. 0</strong>
+                <span class="entries-count">Total Entries: <strong id="entryCount">0</strong></span>
+            </article>
+        </section>
+
+        <!-- ═══ SHARED SHG DATALIST ═══ -->
+        <datalist id="shgList">
+            <option value="Chameli">
+            <option value="Sweta Rani">
+            <option value="Soni">
+            <option value="Durga">
+            <option value="Kali">
+            <option value="Laxmi">
+            <option value="Parwati">
+            <option value="Rani">
+            <option value="Asha">
+            <option value="Shanti">
+            <option value="Tulsi">
+            <option value="Chandni">
+            <option value="Gulab">
+            <option value="Kamal">
+            <option value="Ujjala">
+            <option value="Indra">
+            <option value="Bhagwati">
+            <option value="Sarswati">
+            <option value="Jamuna">
+            <option value="Guriya">
+            <option value="Ansh">
+            <option value="Adhaya">
+            <option value="Aashi">
+            <option value="Mithi">
+            <option value="Sangarsh">
+        </datalist>
+
+        <!-- ═══ FORM PANELS (2-column) ═══ -->
+        <div class="content-grid">
+
+            <!-- INCOME PANEL -->
+            <section class="panel income-panel" id="incomePanel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow income-eyebrow">New Entry</p>
+                        <h2>Add Income</h2>
+                    </div>
+                    <span class="status-pill income-pill">&#8679; Receive</span>
+                </div>
+
+                <form id="incomeForm" class="transaction-form">
+                    <div class="form-row">
+                        <label for="iVoInput">VO Name</label>
+                        <select id="iVoInput" required>
+                            <option value="">Select VO</option>
+                            <option value="shiksha">Shiksha</option>
+                            <option value="ambedkar">Ambedkar</option>
+                            <option value="uttam">Uttam</option>
+                            <option value="chand">Chand</option>
+                            <option value="suraj">Suraj</option>
+                            <option value="lakshay">Lakshay</option>
+                            <option value="mahalaxmi">Mahalaxmi</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="iShgInput">SHG Name</label>
+                        <input type="text" id="iShgInput" list="shgList"
+                               placeholder="Type or select SHG name" required autocomplete="off">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="iCategoryInput">Receive Category</label>
+                        <select id="iCategoryInput" required>
+                            <option value="">Select category</option>
+                            <option value="shg-hrf-savings">SHG HRF Savings</option>
+                            <option value="shg-icf-principle">SHG ICF Principle</option>
+                            <option value="shg-icf-interest">SHG ICF Interest</option>
+                            <option value="shg-gen-principle">SHG GEN Principle</option>
+                            <option value="shg-gen-interest">SHG GEN Interest</option>
+                            <option value="shg-hrf-principle">SHG HRF Principle</option>
+                            <option value="shg-hrf-interest">SHG HRF Interest</option>
+                            <option value="bank-interest">Bank Interest</option>
+                            <option value="administrative">Administrative Funds</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="iTitleInput">Transaction Title</label>
+                        <input type="text" id="iTitleInput" placeholder="Example: Monthly savings" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="iAmountInput">Amount</label>
+                        <input type="number" id="iAmountInput" placeholder="Enter amount" min="1" step="0.01" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="iAdminFundInput">Administrative Fund</label>
+                        <select id="iAdminFundInput">
+                            <option value="">Not Applicable</option>
+                            <option value="cm">CM</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="iFileInput">Attach Receipt</label>
+                        <input type="file" id="iFileInput" accept="image/*,.pdf">
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="iAddBtn" class="income-submit-btn" type="submit">Add Income</button>
+                        <button id="iCancelEditBtn" class="secondary-btn" type="button" hidden>Cancel Edit</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- EXPENSE PANEL -->
+            <section class="panel expense-panel" id="expensePanel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow expense-eyebrow">New Entry</p>
+                        <h2>Add Expense</h2>
+                    </div>
+                    <span class="status-pill expense-pill">&#8681; Payment</span>
+                </div>
+
+                <form id="expenseForm" class="transaction-form">
+                    <div class="form-row">
+                        <label for="eVoInput">VO Name</label>
+                        <select id="eVoInput" required>
+                            <option value="">Select VO</option>
+                            <option value="shiksha">Shiksha</option>
+                            <option value="ambedkar">Ambedkar</option>
+                            <option value="uttam">Uttam</option>
+                            <option value="chand">Chand</option>
+                            <option value="suraj">Suraj</option>
+                            <option value="lakshay">Lakshay</option>
+                            <option value="mahalaxmi">Mahalaxmi</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="eShgInput">SHG Name</label>
+                        <input type="text" id="eShgInput" list="shgList"
+                               placeholder="Type or select SHG name" required autocomplete="off">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="eCategoryInput">Payment Category</label>
+                        <select id="eCategoryInput" required>
+                            <option value="">Select category</option>
+                            <option value="clf-icf-principle">CLF ICF Principle</option>
+                            <option value="clf-icf-interest">CLF ICF Interest</option>
+                            <option value="clf-gen-principle">CLF GEN Principle</option>
+                            <option value="clf-gen-interest">CLF GEN Interest</option>
+                            <option value="clf-bk-contribution">CLF BK Contribution</option>
+                            <option value="cm-payments">CM Payments</option>
+                            <option value="incentive">Incentive</option>
+                            <option value="bank-charge">Bank Charge</option>
+                            <option value="shg-icf-loan">SHG ICF Loan</option>
+                            <option value="shg-gen-loan">SHG GEN Loan</option>
+                            <option value="shg-hrf-loan">SHG HRF Loan</option>
+                            <option value="pmfme-loan">PMFME Loan</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="eTitleInput">Transaction Title</label>
+                        <input type="text" id="eTitleInput" placeholder="Example: Office expense" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="eAmountInput">Amount</label>
+                        <input type="number" id="eAmountInput" placeholder="Enter amount" min="1" step="0.01" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="eCheckinput">Cheque Number</label>
+                        <input type="number" id="eCheckinput" placeholder="Enter cheque number">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="eFileInput">Attach Receipt</label>
+                        <input type="file" id="eFileInput" accept="image/*,.pdf">
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="eAddBtn" class="expense-submit-btn" type="submit">Add Expense</button>
+                        <button id="eCancelEditBtn" class="secondary-btn" type="button" hidden>Cancel Edit</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <!-- ═══ HISTORY PANEL — full width below ═══ -->
+        <section class="panel history-panel">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Records</p>
+                    <h2>Transaction History</h2>
+                </div>
+                <button id="clearAllBtn" class="danger-btn" type="button">Clear All</button>
+            </div>
+
+            <label class="search-box" for="searchInput">
+                <span>Search</span>
+                <input type="search" id="searchInput" placeholder="Search by title, VO, SHG...">
+            </label>
+
+            <ul id="transactionList" class="transaction-list">
+                <li class="empty-state">No transactions added yet.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
